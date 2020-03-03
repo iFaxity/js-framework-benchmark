@@ -20,7 +20,7 @@ console.log("args.framework", args.framework, !args.framework);
 let runBenchmarksFromDirectoryNamesArgs = !args.framework;
 
 // necessary to launch without specifiying a path
-var chromedriver:any = require('chromedriver');
+//var chromedriver:any = require('chromedriver');
 
 let init = `
 window.nonKeyedDetector_reset = function() {

@@ -1,0 +1,41 @@
+{
+  "name": "js-framework-benchmark-ifaxity-lit-fx",
+  "version": "1.1.0",
+  "description": "lit-fx demo",
+  "main": "index.js",
+  "js-framework-benchmark": {
+    "frameworkVersionFromPackage": "@ifaxity/lit-fx",
+    "useShadowRoot": true
+  },
+  "scripts": {
+    "build-dev": "webpack -w",
+    "build-prod": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krausest/js-framework-benchmark.git"
+  },
+  "keywords": [
+    "lit-html"
+  ],
+  "author": "Christian Norrman",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/krausest/js-framework-benchmark/issues"
+  },
+  "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
+  "dependencies": {
+    "@ifaxity/lit-fx": "0.1.3",
+    "rollup-plugin-sourcemaps": "^0.5.0"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.0-alpha.4",
+    "css-loader": "^3.4.0",
+    "file-loader": "^5.0.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "url-loader": "^3.0.0",
+    "vue-loader": "^16.0.0-alpha.3",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
+  }
+}

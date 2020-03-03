@@ -3,12 +3,16 @@ const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env = {}) => ({
+  cache: {},
   mode: env.prod ? 'production' : 'development',
   devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
-  entry: path.resolve(__dirname, './src/main.js'),
+  entry: {
+    main: './src/main',
+  },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/'
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].js',
+		sourceMapFilename: '[file].map',
   },
   plugins: [
     new VueLoaderPlugin(),

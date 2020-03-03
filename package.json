@@ -15,6 +15,7 @@
     "install-webdriver-ts": "cd webdriver-ts && npm install && npm run build-prod",
     "install-webdriver-ts-results": "cd webdriver-ts-results && npm install",
     "install-local": "npm run install-webdriver-ts && npm run install-webdriver-ts-results",
+    "index": "cd webdriver-ts && npm run index",
     "docker-build-image": "docker build -t js-framework-benchmark-ubuntu -f Dockerfile .",
     "docker-start": "cross-env-shell docker run --rm -d -p 8080:8080 --name js-framework-benchmark --volume ${INIT_CWD}:/src --volume js-framework-benchmark:/build js-framework-benchmark-ubuntu",
     "docker-stop": "docker stop js-framework-benchmark",

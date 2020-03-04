@@ -19,7 +19,7 @@ export class MainElement extends LitElement {
             <div class="jumbotron">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1>lit-element 2.2.1 keyed</h1>
+                        <h1>lit-element keyed</h1>
                     </div>
                     <div class="col-md-6">
                         <div class="row">

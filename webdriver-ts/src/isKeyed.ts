@@ -3,6 +3,7 @@ import {buildDriver, setUseShadowRoot, testTextContains, testTextNotContained, t
 import {config, FrameworkData, initializeFrameworks, BenchmarkOptions} from './common'
 import { WebDriver, By, WebElement } from 'selenium-webdriver';
 import * as R from 'ramda';
+import * as isWsl from 'is-wsl';
 
 
 let args = yargs(process.argv)
@@ -20,7 +21,9 @@ console.log("args.framework", args.framework, !args.framework);
 let runBenchmarksFromDirectoryNamesArgs = !args.framework;
 
 // necessary to launch without specifiying a path
-//var chromedriver:any = require('chromedriver');
+if (!isWsl) {
+    var chromedriver: any = require('chromedriver');
+}
 
 let init = `
 window.nonKeyedDetector_reset = function() {

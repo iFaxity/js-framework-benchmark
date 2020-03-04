@@ -9,11 +9,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import {TConfig, config as defaultConfig, JSONResult, FrameworkData, ErrorAndWarning, BenchmarkOptions, BenchmarkDriverOptions, TBenchmarkStatus} from './common'
 import * as R from 'ramda';
+import * as isWsl from 'is-wsl';
 
 let config:TConfig = defaultConfig;
 
 // necessary to launch without specifiying a path
-//var chromedriver:any = require('chromedriver');
+if (!isWsl) {
+    var chromedriver:any = require('chromedriver');
+}
 var jStat:any = require('jstat').jStat;
 
 interface Timingresult {

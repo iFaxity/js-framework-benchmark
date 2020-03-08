@@ -84,7 +84,7 @@ export default defineComponent({
             selected.value = id;
         }
         function run() {
-            rows.push(...buildData());
+            rows.splice(0, rows.length, ...buildData());
             selected.value = undefined;
         }
         function update() {

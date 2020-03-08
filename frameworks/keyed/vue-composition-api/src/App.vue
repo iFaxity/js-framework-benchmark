@@ -51,16 +51,16 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, reactive, defineComponent } from 'vue';
 
 function _random(max) {
     return Math.round(Math.random() * 1000) % max;
 }
 
-export default {
+export default defineComponent({
     name: 'App',
     setup() {
-        const rows = ref([]);
+        const rows = reactive([]);
         const selected = ref(undefined);
         const id = ref(1);
 
@@ -75,43 +75,44 @@ export default {
         }
 
         function add() {
-            rows.value = rows.value.concat(buildData(1000));
+            rows.push(...buildData(1000));
         }
         function remove(id) {
-            rows.value.splice(rows.value.findIndex(d => d.id == id), 1);
+            rows.splice(rows.findIndex(d => d.id == id), 1);
         }
         function select(id) {
             selected.value = id;
         }
         function run() {
-            rows.value = buildData();
+            rows.splice(0, rows.length, ...buildData());
             selected.value = undefined;
         }
         function update() {
-            for (let i = 0; i < rows.value.length; i += 10) {
-                rows.value[i].label += ' !!!';
+            for (let i = 0; i < rows.length; i += 10) {
+                rows[i].label += ' !!!';
             }
         }
         function runLots() {
-            rows.value = buildData(10000);
+            rows.push(...buildData(10000));
             selected.value = undefined;
         }
         function clear() {
-            rows.value = [];
+            rows.splice(0, rows.length);
             selected.value = undefined;
         }
         function swapRows() {
-            if (rows.value.length > 998) {
-                const d1 = rows.value[1];
-                const d998 = rows.value[998];
+            if (rows.length > 998) {
+                const d1 = rows[1];
+                const d998 = rows[998];
 
-                rows.value[1] = d998;
-                rows.value[998] = d1;
+                rows[1] = d998;
+                rows[998] = d1;
             }
         }
 
         function handleClick(e) {
             const { action, id } = e.target.dataset;
+
             if (action && id) {
                 if (action == 'select') {
                     select(id);
@@ -135,5 +136,5 @@ export default {
           handleClick,
         };
     },
-};
+});
 </script>

@@ -1,10 +1,10 @@
 {
-  "name": "js-framework-benchmark-ifaxity-lit-fx",
+  "name": "js-framework-benchmark-shlim",
   "version": "1.1.0",
-  "description": "lit-fx demo",
+  "description": "shlim demo",
   "main": "index.js",
   "js-framework-benchmark": {
-    "frameworkVersionFromPackage": "@ifaxity/lit-fx",
+    "frameworkVersionFromPackage": "@shlim/element",
     "useShadowRoot": true
   },
   "scripts": {
@@ -25,12 +25,12 @@
   },
   "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
   "dependencies": {
-    "@ifaxity/lit-fx": "0.1.3"
+    "@shlim/element": "^0.1.0"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "rollup": "1.12.3",
     "rollup-plugin-minify-html-literals": "^1.2.2",
-    "rollup-plugin-terser": "5.0.0",
-    "@rollup/plugin-node-resolve": "^7.1.1"
+    "rollup-plugin-terser": "5.0.0"
   }
 }

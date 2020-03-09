@@ -1,6 +1,21 @@
-import { html, defineElement, ref, reactive } from '@ifaxity/lit-fx';
-import { repeat } from '@ifaxity/lit-fx/directives/repeat';
+import { html, defineElement, ref } from '@shlim/element';
 
+let startTime;
+let lastMeasure;
+function startMeasure(name) {
+    startTime = performance.now();
+    lastMeasure = name;
+}
+function stopMeasure() {
+    const last = lastMeasure;
+    if (lastMeasure) {
+        window.setTimeout(function () {
+            lastMeasure = null;
+            const stop = performance.now();
+            console.log(last + " took " + (stop-startTime));
+        }, 0);
+    }
+}
 function _random(max) {
     return Math.round(Math.random() * 1000) % max;
 }
@@ -8,7 +23,7 @@ function _random(max) {
 export default defineElement({
     name: 'MainElement',
     setup() {
-        const rows = reactive([]);
+        const rows = ref([]);
         const selected = ref(undefined);
         const id = ref(1);
 
@@ -23,39 +38,55 @@ export default defineElement({
         }
 
         function add() {
-            rows.push(...buildData(1000));
+            startMeasure("add");
+            rows.value = rows.value.concat(buildData(1000));
+            stopMeasure();
         }
         function remove(id) {
-            rows.splice(rows.findIndex(d => d.id == id), 1);
+            startMeasure("remove");
+            rows.value.splice(rows.value.findIndex(d => d.id == id), 1);
+            stopMeasure();
         }
         function select(id) {
+            startMeasure("select");
             selected.value = id;
+            stopMeasure();
         }
         function run() {
-            rows.splice(0, rows.length, ...buildData());
+            startMeasure("run");
+            rows.value = buildData();
             selected.value = undefined;
+            stopMeasure();
         }
         function update() {
-            for (let i = 0; i < rows.length; i += 10) {
-                rows[i].label += ' !!!';
+            startMeasure("update");
+            for (let i = 0; i < rows.value.length; i += 10) {
+                rows.value[i].label += ' !!!';
             }
+            stopMeasure();
         }
         function runLots() {
-            rows.push(...buildData(10000));
+            startMeasure("runLots");
+            rows.value = buildData(10000);
             selected.value = undefined;
+            stopMeasure();
         }
         function clear() {
-            rows.splice(0, rows.length);
+            startMeasure("clear");
+            rows.value = [];
             selected.value = undefined;
+            stopMeasure();
         }
         function swapRows() {
-            if (rows.length > 998) {
-                const d1 = rows[1];
-                const d998 = rows[998];
+            startMeasure("swapRows");
+            if (rows.value.length > 998) {
+                const d1 = rows.value[1];
+                const d998 = rows.value[998];
 
-                rows[1] = d998;
-                rows[998] = d1;
+                rows.value[1] = d998;
+                rows.value[998] = d1;
             }
+            stopMeasure();
         }
 
         function handleClick(e) {
@@ -76,7 +107,7 @@ export default defineElement({
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6">
-                <h1>lit-fx keyed</h1>
+                <h1>lit-fx 0.1.0 (non-keyed)</h1>
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -103,20 +134,20 @@ export default defineElement({
         </div>
     </div>
     <table class="table table-hover table-striped test-data" @click=${handleClick}>
-        <tbody>${repeat(rows, item => item.id, item => html`
-            <tr id=${item.id} class=${item.id == selected.value ? 'danger' : ''}>
-                <td class="col-md-1">${item.id}</td>
-                <td class="col-md-4">
-                <a data-action="select" data-id=${item.id}>${item.label}</a>
-                </td>
-                <td class="col-md-1">
-                <a>
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"
-                        data-action="remove" data-id=${item.id}></span>
-                </a>
-                </td>
-                <td class="col-md-6"></td>
-            </tr>`)}
+        <tbody>${rows.value.map(item => html`
+        <tr id=${item.id} class=${selected.value == item.id ? 'danger' : ''}>
+            <td class="col-md-1">${item.id}</td>
+            <td class="col-md-4">
+            <a data-action="select" data-id=${item.id}>${item.label}</a>
+            </td>
+            <td class="col-md-1">
+            <a>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"
+                    data-action="remove" data-id=${item.id}></span>
+            </a>
+            </td>
+            <td class="col-md-6"></td>
+        </tr>`)}
         </tbody>
     </table>
     <span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>

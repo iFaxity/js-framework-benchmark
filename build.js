@@ -19,18 +19,16 @@ Changed behaviour: Builds only the frameworks. To build webdriver-ts or the resu
 */
 
 let args = yargs(process.argv)
-    .usage("npm run build [-- [--check] [--skipIrrelevant] [--restartWith]]")
+    .usage("npm run build [pattern] [-- [--check] [--skipIrrelevant] [--restartWith]]")
     .help('help')
     .boolean('check')
     .boolean('skipIrrelevant')
     .string('restartWith')
     .argv;
 
-console.log("ARGS", process.argv);
-
+let allArgs = args._.slice(2);
 var referenceBranch = "origin/master";
-
-var restartWithFramework = args.restartWith || '';
+var restartWithFramework = args.restartWith || allArgs[0] || '';
 
 var frameworks = [].concat(
   fs.readdirSync('./frameworks/keyed').map(f => ['keyed', f]),

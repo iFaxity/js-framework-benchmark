@@ -1,0 +1,36 @@
+{
+  "name": "js-framework-benchmark-lit-fx",
+  "version": "1.1.0",
+  "description": "lit-fx demo",
+  "main": "index.js",
+  "js-framework-benchmark": {
+    "frameworkVersionFromPackage": "@ifaxity/lit-fx",
+    "useShadowRoot": true
+  },
+  "scripts": {
+    "build-dev": "rollup -c -w",
+    "build-prod": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krausest/js-framework-benchmark.git"
+  },
+  "keywords": [
+    "lit-html"
+  ],
+  "author": "Christian Norrman",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/krausest/js-framework-benchmark/issues"
+  },
+  "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
+  "dependencies": {
+    "@ifaxity/lit-fx": "^0.1.0"
+  },
+  "devDependencies": {
+    "rollup": "1.12.3",
+    "rollup-plugin-minify-html-literals": "^1.2.2",
+    "rollup-plugin-terser": "5.0.0",
+    "@rollup/plugin-node-resolve": "^7.1.1"
+  }
+}

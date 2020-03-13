@@ -1,5 +1,4 @@
-import { html, defineElement, ref } from '@shlim/element';
-import { repeat } from '@shlim/element/directives/repeat';
+import { html, defineElement, ref } from '@ifaxity/lit-fx';
 
 let startTime;
 let lastMeasure;
@@ -101,14 +100,14 @@ export default defineElement({
                 }
             }
         }
- 
+
         return () => html`
 <link href="/css/currentStyle.css" rel="stylesheet"/>
 <div class="container">
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6">
-                <h1>lit-fx (keyed)</h1>
+                <h1>lit-fx</h1>
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -135,8 +134,8 @@ export default defineElement({
         </div>
     </div>
     <table class="table table-hover table-striped test-data" @click=${handleClick}>
-        <tbody>${repeat(rows.value, item => item.id, item => html`
-        <tr id=${item.id} class=${item.id == selected.value ? 'danger' : ''}>
+        <tbody>${rows.value.map(item => html`
+        <tr id=${item.id} class=${selected.value == item.id ? 'danger' : ''}>
             <td class="col-md-1">${item.id}</td>
             <td class="col-md-4">
             <a data-action="select" data-id=${item.id}>${item.label}</a>

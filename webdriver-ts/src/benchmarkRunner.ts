@@ -164,7 +164,16 @@ async function main() {
         runFrameworks = await initializeFrameworks(hasPackageLock)
     } else if (runBenchmarksFromDirectoryNamesArgs) {
         console.log("MODE: Directory names. Using arguments as the directory names to be re-run: ", allArgs);
-        let matchesDirectoryArg = (directoryName: string) => allArgs.length==0 || allArgs.some(arg => arg==directoryName)
+        let matchesDirectoryArg = (dir: string) => {
+            return allArgs.length == 0 || allArgs.some(name => {
+                let pattern = dir;
+
+                if (name.indexOf('/') == -1) {
+                    pattern = dir.split('/')[1]
+                }
+                return pattern.startsWith(name);
+            });
+        };
         runFrameworks = await initializeFrameworks(matchesDirectoryArg);
     } else {
         console.log("MODE: Classic command line options");

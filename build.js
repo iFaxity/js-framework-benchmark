@@ -28,23 +28,36 @@ let args = yargs(process.argv)
 
 let allArgs = args._.slice(2);
 var referenceBranch = "origin/master";
-var restartWithFramework = args.restartWith || allArgs[0] || '';
+var restartWithFramework = args.restartWith || '';
 
 var frameworks = [].concat(
   fs.readdirSync('./frameworks/keyed').map(f => ['keyed', f]),
   fs.readdirSync('./frameworks/non-keyed').map(f => ['non-keyed', f]));
 
-var notRestarter = ([dir, name]) => {
-  if (!restartWithFramework) return false;
-  if (restartWithFramework.indexOf("/")>-1) {
-    return !(dir+"/"+name).startsWith(restartWithFramework);
+var notRestarter = (pattern, [dir, name]) => {
+  if (pattern.indexOf("/")>-1) {
+    return !(dir+"/"+name).startsWith(pattern);
   } else {
-    return !name.startsWith(restartWithFramework);
+    return !name.startsWith(pattern);
   }
 };
 
-let skippable = _.takeWhile(frameworks, notRestarter);
-let buildable = _.slice(frameworks, skippable.length);
+let skippable;
+let buildable;
+
+if (restartWithFramework) {
+  skippable = _.takeWhile(frameworks, notRestarter.bind(null, restartWithFramework));
+  buildable = _.slice(frameworks, skippable.length);
+} else if (allArgs.length) {
+  let pattern = allArgs[0];
+  [ skippable, buildable ] = _.reduce(frameworks, (acc, item) => {
+    (notRestarter(pattern, item) ? acc[0] : acc[1]).push(item);
+    return acc;
+  }, [[], []]);
+} else {
+  skippable = [];
+  buildable = frameworks;
+}
 
 var relevant = args.skipIrrelevant 
     ? _.filter(buildable, isDifferent)

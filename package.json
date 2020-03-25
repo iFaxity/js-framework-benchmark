@@ -7,7 +7,7 @@
     "build": "node build.js",
     "build-prod": "node build.js",
     "compile": "node build.js",
-    "start": "http-server -c-1 .",
+    "start": "http-server -c-1 . &>/dev/null",
     "bench": "cd webdriver-ts && cross-env LANG=\"en_US.UTF-8\" node dist/benchmarkRunner.js",
     "results": "cd webdriver-ts && npm run results",
     "bench-all": "cd webdriver-ts && npm run bench && npm run results",

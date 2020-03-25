@@ -8,7 +8,6 @@
     "useShadowRoot": true
   },
   "scripts": {
-    "postinstall": "npm link @shlim/element",
     "build-dev": "rollup -c -w",
     "build-prod": "rollup -c"
   },

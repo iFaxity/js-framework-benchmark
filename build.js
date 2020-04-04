@@ -35,10 +35,10 @@ var frameworks = [].concat(
   fs.readdirSync('./frameworks/non-keyed').map(f => ['non-keyed', f]));
 
 var notRestarter = (pattern, [dir, name]) => {
-  if (pattern.indexOf("/")>-1) {
-    return !(dir+"/"+name).startsWith(pattern);
+  if (pattern.indexOf('/')>-1) {
+    return (dir+'/'+name) != pattern;
   } else {
-    return !name.startsWith(pattern);
+    return name != pattern;
   }
 };
 
@@ -49,9 +49,11 @@ if (restartWithFramework) {
   skippable = _.takeWhile(frameworks, notRestarter.bind(null, restartWithFramework));
   buildable = _.slice(frameworks, skippable.length);
 } else if (allArgs.length) {
-  let pattern = allArgs[0];
+  let patterns = allArgs;
   [ skippable, buildable ] = _.reduce(frameworks, (acc, item) => {
-    (notRestarter(pattern, item) ? acc[0] : acc[1]).push(item);
+    const res = patterns.some(pattern => notRestarter(pattern, item));
+
+    (res ? acc[0] : acc[1]).push(item);
     return acc;
   }, [[], []]);
 } else {

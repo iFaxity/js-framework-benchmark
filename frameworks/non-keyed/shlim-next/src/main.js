@@ -75,7 +75,7 @@ export default defineElement({
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6">
-                <h1>shlim2</h1>
+                <h1>@shlim/element-next</h1>
             </div>
             <div class="col-md-6">
                 <div class="row">

@@ -34,13 +34,15 @@ var frameworks = [].concat(
   fs.readdirSync('./frameworks/keyed').map(f => ['keyed', f]),
   fs.readdirSync('./frameworks/non-keyed').map(f => ['non-keyed', f]));
 
-var notRestarter = (pattern, [dir, name]) => {
-  if (pattern.indexOf('/')>-1) {
-    return (dir+'/'+name) != pattern;
-  } else {
-    return name != pattern;
+function notRestarter(pattern, [dir, name]) {
+  let key = pattern.indexOf('/') != -1 ? `${dir}/${name}` : name;
+  const idx = pattern.indexOf('*');
+
+  if (idx != -1) {
+    key = key.substring(0, idx);
   }
-};
+  return pattern != key;
+}
 
 let skippable;
 let buildable;
@@ -51,9 +53,9 @@ if (restartWithFramework) {
 } else if (allArgs.length) {
   let patterns = allArgs;
   [ skippable, buildable ] = _.reduce(frameworks, (acc, item) => {
-    const res = patterns.some(pattern => notRestarter(pattern, item));
+    const res = !patterns.every(pattern => notRestarter(pattern, item));
 
-    (res ? acc[0] : acc[1]).push(item);
+    (res ? acc[1] : acc[0]).push(item);
     return acc;
   }, [[], []]);
 } else {

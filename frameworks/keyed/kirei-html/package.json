@@ -1,0 +1,38 @@
+{
+  "name": "js-framework-benchmark-kirei-html",
+  "version": "1.0.0",
+  "description": "@kirei/html demo",
+  "main": "index.js",
+  "js-framework-benchmark": {
+    "frameworkVersionFromPackage": "@kirei/html"
+  },
+  "scripts": {
+    "postinstall": "npm link @kirei/html",
+    "build-dev": "rollup -c -w",
+    "build-prod": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krausest/js-framework-benchmark.git"
+  },
+  "keywords": [
+    "uhtml"
+  ],
+  "author": "Christian Norrman",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/krausest/js-framework-benchmark/issues"
+  },
+  "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
+  "dependencies": {
+    "@kirei/html": "^1.0.0",
+    "js-framework-benchmark-utils": "0.2.5"
+  },
+  "devDependencies": {
+    "rollup": "^2.0.6",
+    "rollup-plugin-includepaths": "^0.2.3",
+    "rollup-plugin-minify-html-literals": "^1.2.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.3.0"
+  }
+}

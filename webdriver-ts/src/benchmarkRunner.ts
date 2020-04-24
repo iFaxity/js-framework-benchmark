@@ -165,13 +165,14 @@ async function main() {
     } else if (runBenchmarksFromDirectoryNamesArgs) {
         console.log("MODE: Directory names. Using arguments as the directory names to be re-run: ", allArgs);
         let matchesDirectoryArg = (dir: string) => {
-            return allArgs.length == 0 || allArgs.some(name => {
-                let pattern = dir;
+            return allArgs.length == 0 || allArgs.some(pattern => {
+                let key = pattern.indexOf('/') == -1 ? dir.split('/')[1] : dir;
+                const idx = pattern.indexOf('*');
 
-                if (name.indexOf('/') == -1) {
-                    pattern = dir.split('/')[1]
+                if (idx != -1) {
+                  key = key.substring(0, idx);
                 }
-                return pattern.startsWith(name);
+                return pattern == key;
             });
         };
         runFrameworks = await initializeFrameworks(matchesDirectoryArg);

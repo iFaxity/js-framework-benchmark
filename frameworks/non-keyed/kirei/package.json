@@ -1,0 +1,37 @@
+{
+  "name": "js-framework-benchmark-kirei",
+  "version": "1.0.0",
+  "description": "kirei demo",
+  "main": "index.js",
+  "js-framework-benchmark": {
+    "frameworkVersionFromPackage": "@kirei/element",
+    "useShadowRoot": true
+  },
+  "scripts": {
+    "postinstall": "npm link @kirei/element",
+    "build-dev": "rollup -c -w",
+    "build-prod": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krausest/js-framework-benchmark.git"
+  },
+  "keywords": [
+    "lit-html"
+  ],
+  "author": "Christian Norrman",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/krausest/js-framework-benchmark/issues"
+  },
+  "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
+  "dependencies": {
+    "@kirei/element": "^1.0.0"
+  },
+  "devDependencies": {
+    "rollup": "1.12.3",
+    "rollup-plugin-minify-html-literals": "^1.2.2",
+    "rollup-plugin-terser": "5.0.0",
+    "@rollup/plugin-node-resolve": "^7.1.1"
+  }
+}

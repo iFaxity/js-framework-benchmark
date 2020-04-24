@@ -19,7 +19,7 @@ export default {
       },
     }),
     resolve(),
-    terser()
+    terser({ mangle: false })
   ],
   context: 'null',
   moduleContext: 'null',

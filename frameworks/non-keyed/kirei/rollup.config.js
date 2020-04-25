@@ -8,7 +8,7 @@ export default {
   plugins: [
     resolve(),
     minifyHTML(),
-    terser({ warnings: true, mangle: false }),
+    terser({ warnings: true }),
   ],
   onwarn: (msg, warn) => {
     if (!/Circular/.test(msg)) {

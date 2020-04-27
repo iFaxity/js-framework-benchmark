@@ -41,8 +41,9 @@ angular*/src/app.ngsummary.json
 tests/results/completed/
 target/
 webdriver-ts/results/
-webdriver-ts/results*/
-webdriver-ts-results/table_*.html
+webdriver-ts-results/results.json
+webdriver-ts-results/table*.html
+webdriver-ts-results/src/results.ts
 webdriver-ts/table_*.html
 webdriver-ts/error-*.png
 webdriver-ts/log*
@@ -50,6 +51,7 @@ webdriver-ts/.vscode/
 webdriver-ts/prefs
 results-ui/table.html
 results-ui/src/data.js
+/index.html
 marko-*/.cache
 marko-*/static
 marko-*/build

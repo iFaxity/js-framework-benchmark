@@ -13,7 +13,7 @@ export default (state) => {
   return html`
     <table @click=${click}
       class="table table-hover table-striped test-data">
-      <tbody>${html.for(data, item => html`
+      <tbody>${data.map(item => html`
         <tr id=${item.id} class=${item.id === selected ? 'danger' : ''}>
           <td class="col-md-1">${item.id}</td>
           <td class="col-md-4">

@@ -102,7 +102,7 @@ export default defineElement({
         </div>
     </div>
     <table class="table table-hover table-striped test-data" @click=${handleClick}>
-        <tbody>${html.for(rows, item => html`
+        <tbody>${rows.map(item => html`
             <tr id=${item.id} class=${selected.value == item.id ? 'danger' : ''}>
                 <td class="col-md-1">${item.id}</td>
                 <td class="col-md-4">

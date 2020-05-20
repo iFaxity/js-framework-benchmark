@@ -1,4 +1,5 @@
 import { html, defineElement, ref, reactive } from '@kirei/element';
+window.html = html;
 
 function _random(max) {
     return Math.round(Math.random() * 1000) % max;

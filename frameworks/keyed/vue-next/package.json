@@ -1,8 +1,7 @@
 {
   "name": "js-framework-benchmark-vue-next",
-  "version": "1.1.0",
-  "description": "vue-next demo",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "Benchmark for vue.js framework",
   "js-framework-benchmark": {
     "frameworkVersionFromPackage": "vue"
   },
@@ -24,6 +23,7 @@
   },
   "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
   "dependencies": {
+<<<<<<< HEAD
     "vue": "^3.0.0-rc.9"
   },
   "devDependencies": {
@@ -35,5 +35,14 @@
     "vue-loader": "^16.0.0-beta.5",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
+=======
+    "vue": "^3.0.0-beta.2"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.0-beta.2",
+    "vue-loader": "^16.0.0-alpha.1",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
+>>>>>>> 71ecdabc8f9c8ae67d253f4d8632ef0457283af0
   }
 }

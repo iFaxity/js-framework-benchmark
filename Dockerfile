@@ -2,17 +2,18 @@
 FROM ubuntu:19.10
 COPY install_rust.sh /root/
 RUN echo "unsafe-perm = true" > /root/.npmrc
+RUN echo "NG_CLI_ANALYTICS=ci" >> /root/.npmrc
 RUN echo "{ \"allow_root\": true }" >  /root/.bowerrc
 
 # replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update
-RUN apt-get install -y libtinfo5 libghc-zlib-dev rsync ghc haskell-stack curl g++ make git openjdk-8-jdk dos2unix
+RUN apt-get install -y m4 libtinfo5 libghc-zlib-dev rsync ghc haskell-stack curl g++ make git openjdk-8-jdk dos2unix
 
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir -p $NVM_DIR
-ENV NODE_VERSION 10.16.3
+ENV NODE_VERSION 14.4.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | bash
 
 # install node and npm
@@ -34,7 +35,7 @@ RUN mkdir /src
 
 COPY package.json /server
 WORKDIR /server
-RUN npm install 
+RUN npm install
 
 # Volume before chown changes owwner
 VOLUME /src
@@ -48,6 +49,7 @@ RUN bash /root/install_rust.sh
 # USER user
 
 RUN npm install
+COPY lws.config.js /server
 EXPOSE 8080
-CMD ["/server/node_modules/.bin/http-server","-c-1","/build"]
+CMD ["/server/node_modules/.bin/ws","-c","/server/lws.config.js","--static.maxage", "1"]
 

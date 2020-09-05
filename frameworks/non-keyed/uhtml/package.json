@@ -1,5 +1,5 @@
 {
-  "name": "js-framework-benchmark-uhtml",
+  "name": "js-framework-benchmark-non-keyed-uhtml",
   "version": "1.0.0",
   "description": "uhtml demo",
   "main": "index.js",
@@ -25,7 +25,8 @@
   "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
   "dependencies": {
     "js-framework-benchmark-utils": "0.2.5",
-    "uhtml": "1.8.1"
+    "uhtml": "1.8.1",
+    "neverland": "3.3.2"
   },
   "devDependencies": {
     "@ungap/degap": "^0.1.8",

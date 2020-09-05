@@ -26,13 +26,20 @@
   },
   "homepage": "https://github.com/krausest/js-framework-benchmark#readme",
   "dependencies": {
+<<<<<<< HEAD:frameworks/non-keyed/kirei-html/package.json
     "@kirei/html": "^1.0.0",
+=======
+    "domdiff": "2.2.2",
+>>>>>>> 52f4a2ecfed93542ca9e458e9647034a2682bfa2:frameworks/keyed/domdiff/package.json
     "js-framework-benchmark-utils": "0.2.5"
   },
   "devDependencies": {
     "rollup": "^2.0.6",
+<<<<<<< HEAD:frameworks/non-keyed/kirei-html/package.json
     "rollup-plugin-includepaths": "^0.2.3",
     "rollup-plugin-minify-html-literals": "^1.2.3",
+=======
+>>>>>>> 52f4a2ecfed93542ca9e458e9647034a2682bfa2:frameworks/keyed/domdiff/package.json
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.3.0"
   }

@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD:frameworks/non-keyed/react-hooks/package.json
   "name": "js-framework-benchmark-react-hooks",
+=======
+  "name": "js-framework-benchmark-react-redux",
+>>>>>>> 52f4a2ecfed93542ca9e458e9647034a2682bfa2:frameworks/keyed/react-redux/package.json
   "version": "1.1.1",
   "description": "React Hooks demo",
   "main": "index.js",

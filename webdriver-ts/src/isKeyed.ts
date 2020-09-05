@@ -1,9 +1,10 @@
 import * as yargs from 'yargs';
-import {buildDriver, setUseShadowRoot, testTextContains, testTextNotContained, testClassContains, testElementLocatedByXpath, testElementNotLocatedByXPath, testElementLocatedById, clickElementById, clickElementByXPath, getTextByXPath, shadowRoot, findByXPath} from './webdriverAccess'
+import {buildDriver, setUseShadowRoot, testTextContains, testTextNotContained, testClassContains, testElementLocatedByXpath, testElementNotLocatedByXPath, testElementLocatedById, clickElementById, clickElementByXPath, getTextByXPath, mainRoot, findByXPath, setUseRowShadowRoot} from './webdriverAccess'
 import {config, FrameworkData, initializeFrameworks, BenchmarkOptions} from './common'
 import { WebDriver, By, WebElement } from 'selenium-webdriver';
 import * as R from 'ramda';
 import * as isWsl from 'is-wsl';
+import { valid } from 'semver';
 
 
 let args = yargs(process.argv)
@@ -149,43 +150,49 @@ async function assertChildNodes(elem: WebElement, expectedNodes: string[], messa
     return true;
 }
 
+function niceEmptyString(val: string[]): string {
+    if (!val || val.length===0) return "[empty]";
+    if (val.every(v => v.length===0)) return "[empty]";
+    return val.toString();
+}
+
 async function assertClassesContained(elem: WebElement, expectedClassNames: string[], message: string) {
     let actualClassNames = (await elem.getAttribute("class")).split(" ");
     if (!expectedClassNames.every(expected => actualClassNames.includes(expected))) {
-        console.log("css class not correct. Expected for "+ message+ " to be "+expectedClassNames+" but was "+actualClassNames);
+        console.log("css class not correct. Expected for "+ message+ " to be "+expectedClassNames+" but was "+niceEmptyString(actualClassNames));
         return false;
     }
     return true;
 }
 
+
 export async function checkTRcorrect(driver: WebDriver, timeout = config.TIMEOUT): Promise<boolean> {
-    let elem = await shadowRoot(driver);
-    let tr = await findByXPath(elem, '//tbody/tr[1000]');
+    let tr = await findByXPath(driver, '//tbody/tr[1000]');
     if (!await assertChildNodes(tr, [ 'td', 'td', 'a', 'td', 'a', 'span', 'td' ], "tr")) {
         return false;
     }
 
     // first td
-    let td1 = await findByXPath(elem, '//tbody/tr[1000]/td[1]');
+    let td1 = await findByXPath(driver, '//tbody/tr[1000]/td[1]');
     if (!await assertClassesContained(td1, ["col-md-1"], "first td")) {
         return false;
     }
 
 
     // second td
-    let td2 = await findByXPath(elem, '//tbody/tr[1000]/td[2]');
+    let td2 = await findByXPath(driver, '//tbody/tr[1000]/td[2]');
     if (!await assertClassesContained(td2, ["col-md-4"], "second td")) {
         return false;
     }
 
     // third td
-    let td3 = await findByXPath(elem, '//tbody/tr[1000]/td[3]');
+    let td3 = await findByXPath(driver, '//tbody/tr[1000]/td[3]');
     if (!await assertClassesContained(td3, ["col-md-1"], "third td")) {
         return false;
     }
 
     // span in third td
-    let span = await findByXPath(elem, '//tbody/tr[1000]/td[3]/a/span');
+    let span = await findByXPath(driver, '//tbody/tr[1000]/td[3]/a/span');
     if (!await assertClassesContained(span, ["glyphicon","glyphicon-remove"], "span in a in third td")) {
         return false;
     }
@@ -197,7 +204,7 @@ export async function checkTRcorrect(driver: WebDriver, timeout = config.TIMEOUT
 
 
     // fourth td
-    let td4 = await findByXPath(elem, '//tbody/tr[1000]/td[4]');
+    let td4 = await findByXPath(driver, '//tbody/tr[1000]/td[4]');
     if (!await assertClassesContained(td4, ["col-md-6"], "fourth td")) {
         return false;
     }
@@ -207,8 +214,7 @@ export async function checkTRcorrect(driver: WebDriver, timeout = config.TIMEOUT
 }
 
 export async function getInnerHTML(driver: WebDriver, xpath: string, timeout = config.TIMEOUT): Promise<string> {
-    let elem = await shadowRoot(driver);
-    elem = await findByXPath(elem, xpath);
+    let elem = await findByXPath(driver, xpath);
     return elem.getAttribute("innerHTML");
 }
 
@@ -230,8 +236,9 @@ async function runBench(frameworkNames: string[]) {
     for (let i=0;i<runFrameworks.length;i++) {
         let driver = await buildDriver(benchmarkOptions);
         try {
-            let framework = runFrameworks[i];
+            let framework: FrameworkData = runFrameworks[i];
             setUseShadowRoot(framework.useShadowRoot);
+            setUseRowShadowRoot(framework.useRowShadowRoot);
             await driver.get(`http://localhost:${config.PORT}/${framework.uri}/index.html`);
             await testElementLocatedById(driver, "add");
             await clickElementById(driver,'run');
@@ -281,7 +288,11 @@ async function runBench(frameworkNames: string[]) {
             console.log("ERROR running "+runFrameworks[i].fullNameWithKeyedAndVersion, e);
             allCorrect = false;
         } finally {
-            await driver.quit();
+            try {
+                await driver.quit();
+            } catch (e) {
+                console.log("error calling driver.quit - ignoring this excpetion");
+            }
         }
     }
     if (!allCorrect) process.exit(1)
@@ -299,7 +310,8 @@ let benchmarkOptions: BenchmarkOptions = {
     chromeBinaryPath: args.chromeBinary,
     numIterationsForCPUBenchmarks: config.REPEAT_RUN,
     numIterationsForMemBenchmarks: config.REPEAT_RUN_MEM,
-    numIterationsForStartupBenchmark: config.REPEAT_RUN_STARTUP
+    numIterationsForStartupBenchmark: config.REPEAT_RUN_STARTUP,
+    batchSize: 1
 }
 async function main() {
     if (args.help) {

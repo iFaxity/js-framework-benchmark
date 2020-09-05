@@ -1,13 +1,6 @@
-<<<<<<< Updated upstream
-import * as fs from 'fs';
-import * as path from 'path';
-import axios from 'axios';
-import { LighthouseData } from './benchmarks';
-=======
 import * as fs from "fs";
 import * as path from "path";
 import axios from "axios";
->>>>>>> Stashed changes
 
 export interface JSONResult {
   framework: string;
@@ -26,14 +19,8 @@ export interface JSONResult {
 export type TBenchmarkStatus = "OK" | "TEST_FAILED" | "TECHNICAL_ERROR";
 
 export interface ErrorAndWarning {
-<<<<<<< Updated upstream
-    error: String;
-    warnings: String[];
-    result?: number[]|LighthouseData;
-=======
   error: String;
   warnings: String[];
->>>>>>> Stashed changes
 }
 
 export interface BenchmarkDriverOptions {
@@ -44,48 +31,6 @@ export interface BenchmarkDriverOptions {
 }
 
 export interface BenchmarkOptions extends BenchmarkDriverOptions {
-<<<<<<< Updated upstream
-    port: string;
-    batchSize: number;
-    numIterationsForCPUBenchmarks: number;
-    numIterationsForMemBenchmarks: number;
-    numIterationsForStartupBenchmark: number;
-
-}
-
-export let config = {
-    PORT: 8080,
-    REMOTE_DEBUGGING_PORT: 9999,
-    CHROME_PORT: 9998,
-    REPEAT_RUN: 10,
-    REPEAT_RUN_MEM: 1,
-    REPEAT_RUN_STARTUP: 4,
-    DROP_WORST_RUN: 0,
-    WARMUP_COUNT: 5,
-    TIMEOUT: 60 * 1000,
-    LOG_PROGRESS: true,
-    LOG_DETAILS: false,
-    LOG_DEBUG: false,
-    LOG_TIMELINE: false,
-    EXIT_ON_ERROR: null as boolean, // set from command line
-    STARTUP_DURATION_FROM_EVENTLOG: true,
-    STARTUP_SLEEP_DURATION: 1000,
-    FORK_CHROMEDRIVER: true,
-    WRITE_RESULTS: true,
-    RESULTS_DIRECTORY: "results",
-    ALLOW_BATCHING: true
-}
-export type TConfig = typeof config;
-
-export interface FrameworkData {
-    name: string;
-    fullNameWithKeyedAndVersion: string;
-    uri: string;
-    keyed: boolean;
-    useShadowRoot: boolean;
-    useRowShadowRoot: boolean;
-    issues: number[];
-=======
   port: string;
   numIterationsForCPUBenchmarks: number;
   numIterationsForMemBenchmarks: number;
@@ -121,7 +66,6 @@ export interface FrameworkData {
   uri: string;
   keyed: boolean;
   useShadowRoot: boolean;
->>>>>>> Stashed changes
 }
 
 interface Options {
@@ -136,53 +80,11 @@ function computeHash(keyedType: KeyedType, directory: string) {
 }
 
 export interface FrameworkId {
-<<<<<<< Updated upstream
-    keyedType: KeyedType;
-    directory: string;
-    issues: number[];
-=======
   keyedType: KeyedType;
   directory: string;
->>>>>>> Stashed changes
 }
 
 abstract class FrameworkVersionInformationValid implements FrameworkId {
-<<<<<<< Updated upstream
-    public url: string;
-    constructor(public keyedType: KeyedType, public directory: string, customURL: string|undefined, public useShadowRoot: boolean, public useRowShadowRoot: boolean, public issues: number[]) {
-        this.keyedType = keyedType;
-        this.directory = directory;
-        this.url = 'frameworks/'+keyedType+'/'+directory + (customURL ? customURL : '');
-    }
-}
-
-export class FrameworkVersionInformationDynamic extends FrameworkVersionInformationValid  {
-    constructor(keyedType: KeyedType, directory: string, public packageNames: string[],
-        customURL: string|undefined, useShadowRoot: boolean = false, useRowShadowRoot: boolean = false, issues: number[]) {
-            super(keyedType, directory, customURL, useShadowRoot, useRowShadowRoot, issues);
-        }
-    }
-
-export class FrameworkVersionInformationStatic extends FrameworkVersionInformationValid  {
-    constructor(keyedType: KeyedType, directory: string, public frameworkVersion: string, customURL: string|undefined, useShadowRoot: boolean = false, useRowShadowRoot: boolean = false, issues: number[]) {
-        super(keyedType, directory, customURL, useShadowRoot, useRowShadowRoot, issues);
-    }
-    getFrameworkData(): FrameworkData {
-        return {name: this.directory,
-            fullNameWithKeyedAndVersion: this.directory+(this.frameworkVersion ? '-v'+this.frameworkVersion : '')+'-'+this.keyedType,
-            uri: this.url,
-            keyed: this.keyedType === 'keyed',
-            useShadowRoot: this.useShadowRoot,
-            useRowShadowRoot: this.useRowShadowRoot,
-            issues: this.issues
-        }
-    }
-}
-
-export class FrameworkVersionInformationError implements FrameworkId  {
-    public issues: [];
-    constructor(public keyedType: KeyedType, public directory: string, public error: string) {}
-=======
   public url: string;
   constructor(
     public keyedType: KeyedType,
@@ -244,7 +146,6 @@ export class FrameworkVersionInformationError implements FrameworkId {
     public directory: string,
     public error: string
   ) {}
->>>>>>> Stashed changes
 }
 
 export type FrameworkVersionInformation =
@@ -332,45 +233,11 @@ async function loadFrameworkInfo(
         );
       }
     } else {
-<<<<<<< Updated upstream
-        throw "pathInFrameworksDir must start with keyed or non-keyed, but is "+pathInFrameworksDir;
-    }
-    let frameworksPath = path.resolve('..','frameworks');
-    let packageJSONPath = path.resolve(frameworksPath, pathInFrameworksDir, 'package.json');
-    if (fs.existsSync(packageJSONPath)) {
-        let packageJSON = JSON.parse(fs.readFileSync(packageJSONPath, 'utf8'));
-        if (packageJSON['js-framework-benchmark']) {
-            if (packageJSON['js-framework-benchmark']['frameworkVersionFromPackage']) {
-                return new FrameworkVersionInformationDynamic(keyedType, directory,
-                    packageJSON['js-framework-benchmark']['frameworkVersionFromPackage'].split(':'),
-                    packageJSON['js-framework-benchmark']['customURL'],
-                    packageJSON['js-framework-benchmark']['useShadowRoot'],
-                    packageJSON['js-framework-benchmark']['useRowShadowRoot'],
-                    packageJSON['js-framework-benchmark']['issues']
-                );
-            } else if (typeof packageJSON['js-framework-benchmark']['frameworkVersion'] === 'string') {
-                return new FrameworkVersionInformationStatic(keyedType, directory,
-                    packageJSON['js-framework-benchmark']['frameworkVersion'],
-                    packageJSON['js-framework-benchmark']['customURL'],
-                    packageJSON['js-framework-benchmark']['useShadowRoot'],
-                    packageJSON['js-framework-benchmark']['useRowShadowRoot'],
-                    packageJSON['js-framework-benchmark']['issues']
-                );
-            } else {
-                return new FrameworkVersionInformationError(keyedType, directory, 'package.json must contain a \'frameworkVersionFromPackage\' or \'frameworkVersion\' in the \'js-framework-benchmark\'.property');
-            }
-        } else {
-            return new FrameworkVersionInformationError(keyedType, directory, 'package.json must contain a \'js-framework-benchmark\' property');
-        }
-    } else {
-        return new FrameworkVersionInformationError(keyedType, directory, 'No package.json found');
-=======
       return new FrameworkVersionInformationError(
         keyedType,
         directory,
         "package.json must contain a 'js-framework-benchmark' property"
       );
->>>>>>> Stashed changes
     }
   } else {
     return new FrameworkVersionInformationError(
@@ -401,28 +268,6 @@ export async function loadFrameworkVersionInformation(
 }
 
 export class PackageVersionInformationResult {
-<<<<<<< Updated upstream
-    public versions: Array<PackageVersionInformation> = [];
-    constructor(public framework: FrameworkVersionInformationDynamic) {}
-    public add(packageVersionInformation: PackageVersionInformation) {
-        this.versions.push(packageVersionInformation);
-    }
-    public getVersionName(): string {
-        if (this.versions.filter(pi => pi instanceof PackageVersionInformationErrorNoPackageJSONLock).length>0) {
-            return "invalid (no package-lock)";
-        }
-        return this.versions.map(version => (version instanceof PackageVersionInformationValid) ? version.version : 'invalid').join(' + ');
-    }
-    getFrameworkData(): FrameworkData {
-        return {name: this.framework.directory,
-            fullNameWithKeyedAndVersion: this.framework.directory+'-v'+this.getVersionName()+'-'+this.framework.keyedType,
-            uri: this.framework.url,
-            keyed: this.framework.keyedType === 'keyed',
-            useShadowRoot: this.framework.useShadowRoot,
-            useRowShadowRoot: this.framework.useRowShadowRoot,
-            issues: this.framework.issues
-        }
-=======
   public versions: Array<PackageVersionInformation> = [];
   constructor(public framework: FrameworkVersionInformationDynamic) {}
   public add(packageVersionInformation: PackageVersionInformation) {
@@ -435,7 +280,6 @@ export class PackageVersionInformationResult {
       ).length > 0
     ) {
       return "invalid (no package-lock)";
->>>>>>> Stashed changes
     }
     return this.versions
       .map((version) =>

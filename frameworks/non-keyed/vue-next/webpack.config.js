@@ -1,6 +1,5 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env = {}) => ({
   cache: {},
@@ -15,10 +14,7 @@ module.exports = (env = {}) => ({
 		sourceMapFilename: '[file].map',
   },
   plugins: [
-    new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
+    new VueLoaderPlugin()
   ],
   resolve: {
     alias: {
@@ -34,23 +30,6 @@ module.exports = (env = {}) => ({
       {
         test: /\.vue$/,
         use: 'vue-loader'
-      },
-      {
-        test: /\.png$/,
-        use: {
-          loader: 'url-loader',
-          options: { limit: 8192 }
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: !env.prod }
-          },
-          'css-loader'
-        ]
       }
     ]
   },

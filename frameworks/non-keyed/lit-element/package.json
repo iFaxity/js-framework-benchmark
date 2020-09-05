@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "js-framework-benchmark-lit-element",
-=======
   "name": "js-framework-benchmark-non-keyed-lit-element",
->>>>>>> 52f4a2ecfed93542ca9e458e9647034a2682bfa2
   "version": "1.1.0",
   "description": "lit-element demo",
   "main": "index.js",

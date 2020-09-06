@@ -1,35 +1,37 @@
 <template>
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-md-6">
-                <h1>Vue.js 3.0.0-beta2 (non-keyed)</h1>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-sm-6 smallpad">
-                      <button type="button" class="btn btn-primary btn-block" id="run" @click="run">Create 1,000 rows</button>
-                    </div>
-                    <div class="col-sm-6 smallpad">
-                        <button type="button" class="btn btn-primary btn-block" id="runlots" @click="runLots">Create 10,000 rows</button>
-                    </div>
-                    <div class="col-sm-6 smallpad">
-                        <button type="button" class="btn btn-primary btn-block" id="add" @click="add">Append 1,000 rows</button>
-                    </div>
-                    <div class="col-sm-6 smallpad">
-                        <button type="button" class="btn btn-primary btn-block" id="update" @click="update">Update every 10th row</button>
-                    </div>
-                    <div class="col-sm-6 smallpad">
-                        <button type="button" class="btn btn-primary btn-block" id="clear" @click="clear">Clear</button>
-                    </div>
-                    <div class="col-sm-6 smallpad">
-                        <button type="button" class="btn btn-primary btn-block" id="swaprows" @click="swapRows">Swap Rows</button>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Vue.js 3.0.0 (non-keyed)</h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-6 smallpad">
+                        <button type="button" class="btn btn-primary btn-block" id="run" @click="run">Create 1,000 rows</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button type="button" class="btn btn-primary btn-block" id="runlots" @click="runLots">Create 10,000 rows</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button type="button" class="btn btn-primary btn-block" id="add" @click="add">Append 1,000 rows</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button type="button" class="btn btn-primary btn-block" id="update" @click="update">Update every 10th row</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button type="button" class="btn btn-primary btn-block" id="clear" @click="clear">Clear</button>
+                        </div>
+                        <div class="col-sm-6 smallpad">
+                            <button type="button" class="btn btn-primary btn-block" id="swaprows" @click="swapRows">Swap Rows</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <table class="table table-hover table-striped test-data" @click="handleClick">
             <tbody>
-                <tr v-for="item in rows" :key="item.id" :class="{'danger': item.id == selected}">
+                <tr v-for="item in rows" :class="{ danger: item.id == selected }">
                     <td class="col-md-1">{{item.id}}</td>
                     <td class="col-md-4">
                         <a data-action="select" :data-id="item.id">{{item.label}}</a>
@@ -102,7 +104,7 @@ export default {
 
         function remove(id) {
             startMeasure("remove");
-            rows.value.splice(rows.value.findIndex(d => d.id === id), 1);
+            rows.value.splice(rows.value.findIndex(d => d.id == id), 1);
             setRows();
             stopMeasure();
         }
@@ -158,6 +160,17 @@ export default {
             stopMeasure();
         }
 
+        function handleClick(e) {
+            let { action, id } = e.target.dataset;
+            if (action && id) {
+                if (action == 'select') {
+                    select(id);
+                } else if (action == 'remove') {
+                    remove(id);
+                }
+            }
+        }
+
         return {
             rows,
             selected,
@@ -169,6 +182,7 @@ export default {
             select,
             remove,
             add,
+            handleClick,
         }
     }
 }

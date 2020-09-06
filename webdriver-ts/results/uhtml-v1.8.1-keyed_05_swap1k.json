@@ -1,0 +1,1 @@
+{"framework":"uhtml-v1.8.1-keyed","keyed":true,"benchmark":"05_swap1k","type":"cpu","min":81.967,"max":91.473,"mean":87.29120000000002,"median":86.9715,"geometricMean":87.25312070478483,"standardDeviation":2.7106448105365804,"values":[90.881,85.815,86.463,86.507,85.878,87.436,81.967,88.453,91.473,88.039]}

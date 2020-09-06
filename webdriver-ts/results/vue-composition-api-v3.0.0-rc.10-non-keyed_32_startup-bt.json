@@ -1,0 +1,1 @@
+{"framework":"vue-composition-api-v3.0.0-rc.10-non-keyed","keyed":false,"benchmark":"32_startup-bt","type":"startup","min":16,"max":65.45200000000001,"mean":28.363000000000003,"median":16,"geometricMean":22.754679215989945,"standardDeviation":24.726000000000006,"values":[65.45200000000001,16,16,16]}

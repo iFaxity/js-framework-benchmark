@@ -1,0 +1,1 @@
+{"framework":"lighterhtml-v2.5.0-keyed","keyed":true,"benchmark":"06_remove-one-1k","type":"cpu","min":35.2,"max":44.666,"mean":37.24139999999999,"median":36.4315,"geometricMean":37.154132221908114,"standardDeviation":2.811720872822667,"values":[35.2,36.446,44.666,38.966,36.645,35.437,36.892,36.417,36.087,35.658]}

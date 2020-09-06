@@ -1,0 +1,1 @@
+{"framework":"kirei-v1.1.3-keyed","keyed":true,"benchmark":"03_update10th1k_x16","type":"cpu","min":244.903,"max":412.766,"mean":343.9009,"median":351.625,"geometricMean":340.8269346617038,"standardDeviation":46.46246486609738,"values":[347.043,360.567,412.766,391.346,318.422,353.502,349.748,354.899,305.813,244.903]}

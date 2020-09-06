@@ -1,0 +1,1 @@
+{"framework":"kirei-v1.1.3-non-keyed","keyed":false,"benchmark":"31_startup-ci","type":"startup","min":2180.29,"max":2183.85,"mean":2181.9725,"median":2181.875,"geometricMean":2181.972034660359,"standardDeviation":1.6455267646967011,"values":[2183.85,2182.81,2180.29,2180.94]}

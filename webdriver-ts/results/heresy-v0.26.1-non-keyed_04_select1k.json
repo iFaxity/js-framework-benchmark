@@ -1,0 +1,1 @@
+{"framework":"heresy-v0.26.1-non-keyed","keyed":false,"benchmark":"04_select1k","type":"cpu","min":2.86,"max":69.607,"mean":52.24480000000001,"median":55.726,"geometricMean":42.50720828882676,"standardDeviation":18.512864282858978,"values":[51.812,53.692,56.701,69.607,62.225,62.409,54.751,61.451,2.86,46.94]}

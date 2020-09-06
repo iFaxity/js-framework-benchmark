@@ -1,0 +1,1 @@
+{"framework":"heresy-v0.26.1-non-keyed","keyed":false,"benchmark":"32_startup-bt","type":"startup","min":97.85999999999997,"max":108.17199999999997,"mean":103.06,"median":103.10400000000004,"geometricMean":102.96644468943443,"standardDeviation":5.068342529861227,"values":[97.85999999999997,99.64800000000001,108.17199999999997,106.56000000000006]}

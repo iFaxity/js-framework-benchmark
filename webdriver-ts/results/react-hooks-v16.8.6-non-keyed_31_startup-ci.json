@@ -1,0 +1,1 @@
+{"framework":"react-hooks-v16.8.6-non-keyed","keyed":false,"benchmark":"31_startup-ci","type":"startup","min":2555.725,"max":2566.4349999999995,"mean":2560.5337499999996,"median":2559.9875,"geometricMean":2560.5307506941645,"standardDeviation":4.52628319742943,"values":[2566.4349999999995,2561.195,2555.725,2558.7799999999997]}

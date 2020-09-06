@@ -1,0 +1,1 @@
+{"framework":"react-v16.8.6-keyed","keyed":true,"benchmark":"03_update10th1k_x16","type":"cpu","min":203.562,"max":412.415,"mean":322.3139,"median":341.5485,"geometricMean":315.310176480264,"standardDeviation":68.0261100598717,"values":[203.562,260.213,385.657,350.154,412.415,274.65,376.192,332.943,365.382,261.971]}

@@ -1,0 +1,1 @@
+{"framework":"kirei-html-v1.1.3-non-keyed","keyed":false,"benchmark":"07_create10k","type":"cpu","min":1596.725,"max":1742.955,"mean":1640.1694,"median":1626.4845,"geometricMean":1639.6394268221939,"standardDeviation":44.4175339957844,"values":[1742.955,1678.235,1658.239,1604.409,1628.615,1596.725,1624.354,1647.82,1608.211,1612.131]}

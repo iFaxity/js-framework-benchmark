@@ -1,0 +1,1 @@
+{"framework":"kirei-v1.1.3-non-keyed","keyed":false,"benchmark":"34_startup-totalbytes","type":"startup","min":167.287109375,"max":167.287109375,"mean":167.287109375,"median":167.287109375,"geometricMean":167.287109375,"standardDeviation":0,"values":[167.287109375,167.287109375,167.287109375,167.287109375]}

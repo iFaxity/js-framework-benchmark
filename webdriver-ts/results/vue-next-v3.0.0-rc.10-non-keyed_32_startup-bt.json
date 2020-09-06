@@ -1,0 +1,1 @@
+{"framework":"vue-next-v3.0.0-rc.10-non-keyed","keyed":false,"benchmark":"32_startup-bt","type":"startup","min":17.063999999999997,"max":111.34000000000002,"mean":69.483,"median":74.76400000000001,"geometricMean":57.042567688895396,"standardDeviation":39.11302737792956,"values":[111.34000000000002,17.063999999999997,78.88400000000001,70.644]}

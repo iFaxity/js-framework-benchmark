@@ -1,0 +1,1 @@
+{"framework":"lighterhtml-v2.5.0-keyed","keyed":true,"benchmark":"32_startup-bt","type":"startup","min":16,"max":17.055999999999994,"mean":16.419999999999998,"median":16.311999999999998,"geometricMean":16.413952440461998,"standardDeviation":0.5160465095318417,"values":[16,17.055999999999994,16.624,16]}

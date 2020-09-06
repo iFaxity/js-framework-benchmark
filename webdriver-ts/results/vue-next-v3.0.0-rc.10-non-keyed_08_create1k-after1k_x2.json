@@ -1,0 +1,1 @@
+{"framework":"vue-next-v3.0.0-rc.10-non-keyed","keyed":false,"benchmark":"08_create1k-after1k_x2","type":"cpu","min":504.147,"max":645.386,"mean":550.9241,"median":538.46,"geometricMean":549.3921737213095,"standardDeviation":44.31147066555616,"values":[538.138,508.579,520.884,601.701,645.386,559.458,538.782,566.771,525.395,504.147]}

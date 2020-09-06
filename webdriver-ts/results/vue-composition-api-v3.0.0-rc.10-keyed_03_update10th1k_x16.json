@@ -1,0 +1,1 @@
+{"framework":"vue-composition-api-v3.0.0-rc.10-keyed","keyed":true,"benchmark":"03_update10th1k_x16","type":"cpu","min":364.729,"max":511.082,"mean":443.27200000000005,"median":449.3645,"geometricMean":441.10971666215926,"standardDeviation":45.616946395439975,"values":[511.082,364.729,472.179,427.272,410.565,391.333,442.219,463.325,493.506,456.51]}

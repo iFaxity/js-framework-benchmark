@@ -1,0 +1,1 @@
+{"framework":"kirei-html-v1.1.3-keyed","keyed":true,"benchmark":"32_startup-bt","type":"startup","min":16,"max":76.99999999999997,"mean":31.249999999999993,"median":16,"geometricMean":23.698053101322387,"standardDeviation":30.499999999999986,"values":[76.99999999999997,16,16,16]}

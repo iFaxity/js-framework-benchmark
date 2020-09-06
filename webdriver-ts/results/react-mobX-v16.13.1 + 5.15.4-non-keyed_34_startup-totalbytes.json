@@ -1,0 +1,1 @@
+{"framework":"react-mobX-v16.13.1 + 5.15.4-non-keyed","keyed":false,"benchmark":"34_startup-totalbytes","type":"startup","min":345.0888671875,"max":345.0888671875,"mean":345.0888671875,"median":345.0888671875,"geometricMean":345.0888671875,"standardDeviation":0,"values":[345.0888671875,345.0888671875,345.0888671875,345.0888671875]}

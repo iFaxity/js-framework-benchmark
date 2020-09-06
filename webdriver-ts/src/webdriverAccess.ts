@@ -45,11 +45,6 @@ function convertPath(path: string): Array<PathPart> {
   return res;
 }
 
-async function shadowRoot(driver: WebDriver, selector: string): Promise<WebElement> {
-    const el = await driver.findElement(By.css(selector));
-    return driver.executeScript(`return arguments[0].shadowRoot`, el);
-}
-
 // Fake findByXPath for simple XPath expressions to allow usage with shadow dom
 export async function findByXPath(
   node: WebElement,

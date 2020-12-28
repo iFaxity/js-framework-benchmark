@@ -13,10 +13,10 @@ const RESULTS_PATH = path.resolve(__dirname + '/../../webdriver-ts/results');
 const frameworks = yargs(process.argv, {array: ["framework"]}).framework || [];
 
 function filterFramework(file) {
-	return (
-		frameworks.length === 0 ||
-		frameworks.some(f => file.indexOf(f) > -1)
-	);
+  return (
+    frameworks.length === 0 ||
+    frameworks.some(f => file.indexOf(f) > -1)
+  );
 }
 
 function encodeBench(obj) {
@@ -72,65 +72,65 @@ async function build() {
         ],
     });
 
-	// from docs (https://github.com/mishoo/UglifyJS2)
-	const compressDefaults = {
-		arguments: true,
-		booleans: true,
-		collapse_vars: true,
-		comparisons: true,
-		conditionals: true,
-		dead_code: true,
-		directives: true,
-		drop_console: false,
-		drop_debugger: true,
-		evaluate: true,
-		expression: false,
-		global_defs: {},
-		hoist_funs: false,
-		hoist_props: true,
-		hoist_vars: false,
-		if_return: true,
-		inline: 3,
-		join_vars: true,
-		keep_fargs: true,
-		keep_fnames: false,
-		keep_infinity: false,
-		loops: true,
-		negate_iife: true,
-		passes: 1,
-		properties: true,
-		pure_funcs: null,
-		pure_getters: "strict",
-		reduce_funcs: true,
-		reduce_vars: true,
-		sequences: true,
-		side_effects: true,
-		switches: true,
-		toplevel: false,
-		top_retain: null,
-		typeofs: true,
-		unsafe: false,
-		unsafe_comps: false,
-		unsafe_Function: false,
-		unsafe_math: false,
-		unsafe_proto: false,
-		unsafe_regexp: false,
-		unsafe_undefined: false,
-		unused: true,
-	};
+  // from docs (https://github.com/mishoo/UglifyJS2)
+  const compressDefaults = {
+    arguments: true,
+    booleans: true,
+    collapse_vars: true,
+    comparisons: true,
+    conditionals: true,
+    dead_code: true,
+    directives: true,
+    drop_console: false,
+    drop_debugger: true,
+    evaluate: true,
+    expression: false,
+    global_defs: {},
+    hoist_funs: false,
+    hoist_props: true,
+    hoist_vars: false,
+    if_return: true,
+    inline: 3,
+    join_vars: true,
+    keep_fargs: true,
+    keep_fnames: false,
+    keep_infinity: false,
+    loops: true,
+    negate_iife: true,
+    passes: 1,
+    properties: true,
+    pure_funcs: null,
+    pure_getters: "strict",
+    reduce_funcs: true,
+    reduce_vars: true,
+    sequences: true,
+    side_effects: true,
+    switches: true,
+    toplevel: false,
+    top_retain: null,
+    typeofs: true,
+    unsafe: false,
+    unsafe_comps: false,
+    unsafe_Function: false,
+    unsafe_math: false,
+    unsafe_proto: false,
+    unsafe_regexp: false,
+    unsafe_undefined: false,
+    unused: true,
+  };
 
-	const uglifyOpts = {
-		compress: Object.assign({}, compressDefaults, {
-			booleans: false,
-			inline: 0,
-			keep_fargs: false,
-			hoist_props: false,
-			loops: false,
-			reduce_funcs: false,
-			unsafe: true,
-			unsafe_math: true,
-		}),
-	};
+  const uglifyOpts = {
+    compress: Object.assign({}, compressDefaults, {
+      booleans: false,
+      inline: 0,
+      keep_fargs: false,
+      hoist_props: false,
+      loops: false,
+      reduce_funcs: false,
+      unsafe: true,
+      unsafe_math: true,
+    }),
+  };
 
     const { output } = await bundle.generate({
         format: "iife",

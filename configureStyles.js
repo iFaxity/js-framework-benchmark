@@ -12,20 +12,20 @@ let args = yargs(process.argv)
 .argv;
 
 if (args.bootstrap ^ args.minimal == false) {
-	console.log("ERROR: You must either choose bootstrap or minimal");
+  console.log("ERROR: You must either choose bootstrap or minimal");
 } else {
-	if (args.bootstrap) {
-		fs.copySync("css/useOriginalBootstrap.css","css/currentStyle.css");
-		let bootstrap = fs.readFileSync("css/bootstrap/dist/css/bootstrap.min.css")
-		let mainCss = fs.readFileSync("css/main.css")
-		let str = `<dom-module id="shared-styles"><template><style>${bootstrap}\n${mainCss}</style></template></dom-module>`;
-		fs.writeFileSync("polymer-v2.0.0-non-keyed/src/shared-styles.html", str);
-	} else {
-		fs.copySync("css/useMinimalCss.css","css/currentStyle.css");
-		let minCss = fs.readFileSync("css/useMinimalCss.css")
-		let str = `<dom-module id="shared-styles"><template><style>${minCss}</style></template></dom-module>`;
-		fs.writeFileSync("polymer-v2.0.0-non-keyed/src/shared-styles.html", str);
-	}
+  if (args.bootstrap) {
+    fs.copySync("css/useOriginalBootstrap.css","css/currentStyle.css");
+    let bootstrap = fs.readFileSync("css/bootstrap/dist/css/bootstrap.min.css")
+    let mainCss = fs.readFileSync("css/main.css")
+    let str = `<dom-module id="shared-styles"><template><style>${bootstrap}\n${mainCss}</style></template></dom-module>`;
+    fs.writeFileSync("polymer-v2.0.0-non-keyed/src/shared-styles.html", str);
+  } else {
+    fs.copySync("css/useMinimalCss.css","css/currentStyle.css");
+    let minCss = fs.readFileSync("css/useMinimalCss.css")
+    let str = `<dom-module id="shared-styles"><template><style>${minCss}</style></template></dom-module>`;
+    fs.writeFileSync("polymer-v2.0.0-non-keyed/src/shared-styles.html", str);
+  }
 }
 
 
@@ -57,17 +57,17 @@ function copyFileSync( source, target ) {
 }
 
 function include(name) {
-		if (name.indexOf("binding.scala")>-1) {
-				if (name.indexOf("/target")>-1) {
-					return name.indexOf("/target/web")>-1;
-				}
-		}
-		if (excludes.every(ex => name.indexOf(ex)==-1)) {
-			// console.log("<- filter", name);
-			return true;
-		} else {
-			return false;
-		}
+    if (name.indexOf("binding.scala")>-1) {
+        if (name.indexOf("/target")>-1) {
+          return name.indexOf("/target/web")>-1;
+        }
+    }
+    if (excludes.every(ex => name.indexOf(ex)==-1)) {
+      // console.log("<- filter", name);
+      return true;
+    } else {
+      return false;
+    }
 }
 
 function copyFolderRecursiveSync( source, target ) {
@@ -83,29 +83,29 @@ function copyFolderRecursiveSync( source, target ) {
     if ( fs.lstatSync( source ).isDirectory() ) {
         files = fs.readdirSync( source );
         files.forEach( function ( file ) {
-			if (include(file)) {
-				var curSource = path.join( source, file );
-				if ( fs.lstatSync( curSource ).isDirectory() ) {
-					// console.log("copy dir "+curSource);
-					copyFolderRecursiveSync( curSource, targetFolder );
-				} else if ( fs.lstatSync( curSource ).isSymbolicLink() ) {
-					console.log("**** LINK");
-				} else {
-					// console.log("copy file "+curSource);
-					copyFileSync( curSource, targetFolder );
-				}
-			}
+      if (include(file)) {
+        var curSource = path.join( source, file );
+        if ( fs.lstatSync( curSource ).isDirectory() ) {
+          // console.log("copy dir "+curSource);
+          copyFolderRecursiveSync( curSource, targetFolder );
+        } else if ( fs.lstatSync( curSource ).isSymbolicLink() ) {
+          console.log("**** LINK");
+        } else {
+          // console.log("copy file "+curSource);
+          copyFileSync( curSource, targetFolder );
+        }
+      }
         } );
     }
 }
 
 _.each(fs.readdirSync('.'), function(name) {
-	if(fs.statSync(name).isDirectory() && name[0] !== '.' && excludedDirectories.indexOf(name)==-1) {
-		console.log("dist"+path.sep+name);
-		fs.mkdirSync("dist"+path.sep+name);
-		copyFolderRecursiveSync(name, "dist");
+  if(fs.statSync(name).isDirectory() && name[0] !== '.' && excludedDirectories.indexOf(name)==-1) {
+    console.log("dist"+path.sep+name);
+    fs.mkdirSync("dist"+path.sep+name);
+    copyFolderRecursiveSync(name, "dist");
 
-	}
+  }
 });
 
 */

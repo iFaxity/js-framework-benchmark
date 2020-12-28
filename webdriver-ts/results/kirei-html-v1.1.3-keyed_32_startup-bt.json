@@ -1,1 +1,1 @@
-{"framework":"kirei-html-v1.1.3-keyed","keyed":true,"benchmark":"32_startup-bt","type":"startup","min":16,"max":76.99999999999997,"mean":31.249999999999993,"median":16,"geometricMean":23.698053101322387,"standardDeviation":30.499999999999986,"values":[76.99999999999997,16,16,16]}
+{"framework":"kirei-html-v1.1.3-keyed","keyed":true,"benchmark":"32_startup-bt","type":"startup","min":16,"max":16.18,"mean":16.045,"median":16,"geometricMean":16.044811392544325,"standardDeviation":0.08999999999999986,"values":[16,16,16.18,16]}

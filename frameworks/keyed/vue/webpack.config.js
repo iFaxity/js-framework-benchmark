@@ -1,49 +1,31 @@
-'use strict';
-var path = require('path');
-var webpack = require('webpack');
-var VueLoaderPlugin = require('vue-loader/lib/plugin');
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
-module.exports = [{
-	cache: {},
-	entry: {
-		main: './src/main',
-	},
-	output: {
-		path: path.resolve(__dirname, "dist"),
-		filename: '[name].js',
-		sourceMapFilename: "[file].map",
-	},
-	resolve: {
-		modules: [
-			__dirname,
-			path.resolve(__dirname, "src"),
-			"node_modules"
-		]
-	},
-	plugins: [
-		new VueLoaderPlugin()
-	],
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				loader: 'babel-loader',
-						exclude: /node_modules/
-			},
-			{
-				test: /\.css$/,
-				use: [
-					'vue-style-loader',
-					 'css-loader'
-				]
-			},
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader',
-				query: {
-					preserveWhitespace: false
-				}
-			}
-		]
-	},
-}];
+module.exports = (env = {}) => ({
+  mode: 'production',
+  entry: path.resolve(__dirname, './src/main.js'),
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/'
+  },
+  resolve: {
+    alias: {
+      // this isn't technically needed, since the default `vue` entry for bundlers
+      // is a simple `export * from '@vue/runtime-dom`. However having this
+      // extra re-export somehow causes webpack to always invalidate the module
+      // on the first HMR update and causes the page to reload.
+      'vue': '@vue/runtime-dom'
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+    ]
+  },
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
+})

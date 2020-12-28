@@ -16,9 +16,9 @@
         </div>
         <div class="panel-body">
             <ul class="nav nav-pills nav-stacked">
-				{{~it.frameworks :framework}}
+        {{~it.frameworks :framework}}
                 <li><a href="/{{=framework.uri}}/index.html"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> {{=framework.fullNameWithKeyedAndVersion}}</a></li>
-				{{~}}
+        {{~}}
             </ul>
         </div>
     </div>

@@ -1,1 +1,1 @@
-{"framework":"uhtml-v1.8.1-keyed","keyed":true,"benchmark":"32_startup-bt","type":"startup","min":16,"max":16,"mean":16,"median":16,"geometricMean":16,"standardDeviation":0,"values":[16,16,16,16]}
+{"framework":"uhtml-v1.8.1-keyed","keyed":true,"benchmark":"32_startup-bt","type":"startup","min":16,"max":18.755999999999993,"mean":16.689,"median":16,"geometricMean":16.64849741463239,"standardDeviation":1.3779999999999966,"values":[16,18.755999999999993,16,16]}

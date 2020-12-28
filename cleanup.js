@@ -6,11 +6,11 @@ const path = require('path');
 const rimraf = require('rimraf');
 
 function rmIfExists(base, name) {
-	let dir = path.join(base, name);
-	if(fs.existsSync(dir)) {
-		console.log("Clean ",dir);
+  let dir = path.join(base, name);
+  if(fs.existsSync(dir)) {
+    console.log("Clean ",dir);
         rimraf.sync(dir);
-	}
+  }
 }
 
 for (let keyedType of ['keyed', 'non-keyed']) {
@@ -20,14 +20,14 @@ for (let keyedType of ['keyed', 'non-keyed']) {
     for (let name of directories) {
         let fd = path.resolve(dir, name);
         console.log('cleaning ', fd);
-		if(fs.existsSync(fd+"/node_modules")) {
-			rimraf.sync(fd+"/node_modules");
-		}
-		rmIfExists(fd, "package-lock.json");
-		rmIfExists(fd, "yarn.lock");
-		rmIfExists(fd, "dist");
-		rmIfExists(fd, "elm-stuff");
-		rmIfExists(fd, "bower_components");
-		rmIfExists(fd, "node_modules");
-	}
+    if(fs.existsSync(fd+"/node_modules")) {
+      rimraf.sync(fd+"/node_modules");
+    }
+    rmIfExists(fd, "package-lock.json");
+    rmIfExists(fd, "yarn.lock");
+    rmIfExists(fd, "dist");
+    rmIfExists(fd, "elm-stuff");
+    rmIfExists(fd, "bower_components");
+    rmIfExists(fd, "node_modules");
+  }
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-var {observable, computed, action} = require ("mobx");
+var {makeObservable, observable, computed, action} = require ("mobx");
 
 function _random(max) {
     return Math.round(Math.random()*1000)%max;
@@ -11,9 +11,16 @@ let id = 1;
 class Row {
     id = 0;
     store;
-    @observable label = "";
-    @computed get isSelected() {
+    label = "";
+    get isSelected() {
         return this.store.selected === this;
+    }
+
+    constructor() {
+        makeObservable(this, {
+            label: observable,
+            isSelected: computed,
+        });
     }
 }
 
@@ -30,10 +37,27 @@ function row(store, label, _id) {
 }
 
 export class Store {
-    @observable data = [];
-    @observable selected = null;
+    data = [];
+    selected = null;
 
-    @action buildData(count = 1000) {
+    constructor() {
+        makeObservable(this, {
+            data: observable,
+            selected: observable,
+            buildData: action,
+            updateData: action,
+            delete: action,
+            run: action,
+            add: action,
+            update: action,
+            select: action,
+            runLots: action,
+            clear: action,
+            swapRows: action,
+        });
+    }
+
+    buildData(count = 1000) {
         var adjectives = ["pretty", "large", "big", "small", "tall", "short", "long", "handsome", "plain", "quaint", "clean", "elegant", "easy", "angry", "crazy", "helpful", "mushy", "odd", "unsightly", "adorable", "important", "inexpensive", "cheap", "expensive", "fancy"];
         var colours = ["red", "yellow", "blue", "green", "pink", "brown", "purple", "brown", "white", "black", "orange"];
         var nouns = ["table", "chair", "house", "bbq", "desk", "car", "pony", "cookie", "sandwich", "burger", "pizza", "mouse", "keyboard"];
@@ -43,40 +67,40 @@ export class Store {
         return data;
     }
 
-    @action updateData(mod = 10) {
+    updateData(mod = 10) {
         for (let i=0;i<this.data.length;i+=10) {
             this.data[i].label = this.data[i].label + ' !!!';
         }
     }
-    @action delete(row) {
+    delete(row) {
         this.data.remove(row);
     }
-    @action run() {
+    run() {
         this.data.replace(this.buildData());
         this.selected = undefined;
     }
-    @action add() {
+    add() {
         this.data.spliceWithArray(this.data.length, 0, this.buildData(1000));
     }
-    @action update() {
+    update() {
         this.updateData();
     }
-    @action select(row) {
+    select(row) {
         this.selected = row;
     }
-    @action runLots() {
+    runLots() {
         this.data.replace(this.buildData(10000));
         this.selected = undefined;
     }
-    @action clear() {
+    clear() {
         this.data.clear();
         this.selected = undefined;
     }
-    @action swapRows() {
-    	if(this.data.length > 998) {
-    		var a = this.data[1];
-    		this.data[1] = this.data[998];
-    		this.data[998] = a;
-    	}
+    swapRows() {
+        if (this.data.length > 998) {
+            var a = this.data[1];
+            this.data[1] = this.data[998];
+            this.data[998] = a;
+        }
     }
 }

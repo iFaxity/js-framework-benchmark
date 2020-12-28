@@ -1,1 +1,0 @@
-{"framework":"react-mobX-v16.13.1 + 5.15.4-non-keyed","keyed":false,"benchmark":"08_create1k-after1k_x2","type":"cpu","min":552.797,"max":667.111,"mean":601.3278,"median":598.98,"geometricMean":600.5567331981069,"standardDeviation":32.31196302988173,"values":[597.099,667.111,624.004,603.78,599.243,552.797,598.717,623.286,565.045,582.196]}

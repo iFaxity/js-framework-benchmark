@@ -71,18 +71,18 @@ _.each(skippable, ([dir,name]) => console.log("*** Skipping " + dir + "/" + name
 
 _.each(relevant, function([dir,name]) {
   let fullname = path.join("frameworks", dir, name);
-	if(fs.statSync(fullname).isDirectory() && fs.existsSync(path.join(fullname, "package.json"))) {
+  if(fs.statSync(fullname).isDirectory() && fs.existsSync(path.join(fullname, "package.json"))) {
           console.log("*** Executing npm install in "+fullname);
             exec('npm install', {
-				cwd: fullname,
-				stdio: 'inherit'
-			});
-			console.log("*** Executing npm run build-prod in "+fullname);
-			exec('npm run build-prod', {
-				cwd: fullname,
-				stdio: 'inherit'
-			});
-	}
+        cwd: fullname,
+        stdio: 'inherit'
+      });
+      console.log("*** Executing npm run build-prod in "+fullname);
+      exec('npm run build-prod', {
+        cwd: fullname,
+        stdio: 'inherit'
+      });
+  }
 });
 
 var testable = args.check ? relevant : [];
@@ -91,10 +91,10 @@ _.each(testable, function([dir,name]) {
       if(fs.statSync(fullname).isDirectory() && fs.existsSync(path.join(fullname, "package.json"))) {
             console.log("*** Executing npm run selenium for "+fullname);
             exec(`npm run bench ${dir}/${name} -- --count 1 --fork false --noResults`, {
-				cwd: "webdriver-ts",
-				stdio: 'inherit'
-			});
-	}
+        cwd: "webdriver-ts",
+        stdio: 'inherit'
+      });
+  }
 });
 
 function isDifferent([dir,name]) {

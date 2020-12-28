@@ -1,25 +1,13 @@
-const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = (env = {}) => ({
-  cache: {},
-  mode: env.prod ? 'production' : 'development',
-  devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
-  entry: {
-    main: './src/main',
-  },
+  mode: 'production',
+  entry: path.resolve(__dirname, './src/main.js'),
   output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js',
-		sourceMapFilename: '[file].map',
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/'
   },
-  plugins: [
-    new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
-  ],
   resolve: {
     alias: {
       // this isn't technically needed, since the default `vue` entry for bundlers
@@ -35,23 +23,9 @@ module.exports = (env = {}) => ({
         test: /\.vue$/,
         use: 'vue-loader'
       },
-      {
-        test: /\.png$/,
-        use: {
-          loader: 'url-loader',
-          options: { limit: 8192 }
-        }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: !env.prod }
-          },
-          'css-loader'
-        ]
-      }
     ]
   },
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
 })

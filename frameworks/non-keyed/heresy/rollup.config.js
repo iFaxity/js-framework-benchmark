@@ -1,18 +1,18 @@
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import includePaths from 'rollup-plugin-includepaths';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
+//import minifyHTML from 'rollup-plugin-minify-html-template-literals';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: 'src/index.js',
   plugins: [
-    minifyHTML({
+    /*minifyHTML({
       options: {
         minifyOptions: {
           keepClosingSlash: true
         }
       }
-    }),
+    }),*/
     includePaths({
       include: {
         "@ungap/create-content": "./node_modules/@ungap/degap/create-content.js",

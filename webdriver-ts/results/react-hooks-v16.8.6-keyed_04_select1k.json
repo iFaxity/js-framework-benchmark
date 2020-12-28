@@ -1,1 +1,0 @@
-{"framework":"react-hooks-v16.8.6-keyed","keyed":true,"benchmark":"04_select1k","type":"cpu","min":26.919,"max":101.645,"mean":69.1009,"median":70.8035,"geometricMean":65.50743197328167,"standardDeviation":21.231751314429477,"values":[101.645,73.793,96.867,26.919,68.391,54.969,56.07,73.216,73.945,65.194]}

@@ -1,17 +1,17 @@
-import minifyHTML from 'rollup-plugin-minify-html-literals';
-import resolve from 'rollup-plugin-node-resolve';
+//import minifyHTML from 'rollup-plugin-minify-html-template-literals';
+import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: 'src/index.js',
   plugins: [
-    minifyHTML({
+    /*minifyHTML({
       options: {
         minifyOptions: {
           keepClosingSlash: true
         }
       }
-    }),
+    }),*/
     resolve(),
     terser()
   ],

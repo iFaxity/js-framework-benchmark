@@ -6,7 +6,7 @@ var yargs = require('yargs');
 
 /*
 The restart parameter can be used to rebuily only some of the frameworks.
-One can either rebuild alll frameworks where the parameter matches the prefix of a 
+One can either rebuild all frameworks where the parameter matches the prefix of a 
 framework name, no matter if keyed or non-keyed:
 --restartWith angu 
 (Matches keyed and non-keyed angular, angularjs, angular-ivy, ...)

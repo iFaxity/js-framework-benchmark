@@ -1,11 +1,11 @@
-import { html, defineElement, ref, reactive } from '@kirei/element';
+import { html, defineComponent, ref, reactive } from '@kirei/element';
 window.html = html;
 
 function _random(max) {
     return Math.round(Math.random() * 1000) % max;
 }
 
-export default defineElement({
+export default defineComponent({
     name: 'MainElement',
     setup() {
         const rows = reactive([]);

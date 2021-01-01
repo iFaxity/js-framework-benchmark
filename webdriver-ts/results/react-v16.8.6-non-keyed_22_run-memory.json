@@ -1,1 +1,1 @@
-{"framework":"react-v16.8.6-non-keyed","keyed":false,"benchmark":"22_run-memory","type":"memory","min":4.331165313720703,"max":4.331165313720703,"mean":4.331165313720703,"median":4.331165313720703,"geometricMean":4.331165313720703,"standardDeviation":null,"values":[4.331165313720703]}
+{"framework":"react-v16.8.6-non-keyed","keyed":false,"benchmark":"22_run-memory","type":"memory","min":4.331268310546875,"max":4.331268310546875,"mean":4.331268310546875,"median":4.331268310546875,"geometricMean":4.331268310546875,"standardDeviation":null,"values":[4.331268310546875]}

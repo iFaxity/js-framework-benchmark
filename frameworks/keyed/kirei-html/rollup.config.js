@@ -1,27 +1,19 @@
+import { terser } from 'rollup-plugin-terser';
 //import minifyHTML from 'rollup-plugin-minify-html-template-literals';
 import resolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
+import replace from '@rollup/plugin-replace';
 
 export default {
-  input: 'src/index.js',
+  input: `src/main.js`,
+  output: { file: `dist/main.js`, format: 'iife', name: 'kirei' },
   plugins: [
-    /*minifyHTML({
-      options: {
-        minifyOptions: {
-          keepClosingSlash: true
-        }
-      }
-    }),*/
     resolve(),
-    terser()
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    //minifyHTML(),
+    terser({ warnings: true })
   ],
-  context: 'null',
-  moduleContext: 'null',
-  output: {
-    file: 'dist/index.js',
-    format: 'iife',
-    name: 'app'
-  },
   onwarn: (msg, warn) => {
     if (!/Circular/.test(msg)) {
       warn(msg)

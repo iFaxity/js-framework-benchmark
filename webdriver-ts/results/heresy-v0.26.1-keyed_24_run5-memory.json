@@ -1,1 +1,1 @@
-{"framework":"heresy-v0.26.1-keyed","keyed":true,"benchmark":"24_run5-memory","type":"memory","min":4.681678771972656,"max":4.681678771972656,"mean":4.681678771972656,"median":4.681678771972656,"geometricMean":4.681678771972656,"standardDeviation":null,"values":[4.681678771972656]}
+{"framework":"heresy-v0.26.1-keyed","keyed":true,"benchmark":"24_run5-memory","type":"memory","min":4.681270599365234,"max":4.681270599365234,"mean":4.681270599365234,"median":4.681270599365234,"geometricMean":4.681270599365234,"standardDeviation":null,"values":[4.681270599365234]}

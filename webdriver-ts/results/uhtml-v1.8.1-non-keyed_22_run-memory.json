@@ -1,1 +1,1 @@
-{"framework":"uhtml-v1.8.1-non-keyed","keyed":false,"benchmark":"22_run-memory","type":"memory","min":2.282573699951172,"max":2.282573699951172,"mean":2.282573699951172,"median":2.282573699951172,"geometricMean":2.282573699951172,"standardDeviation":null,"values":[2.282573699951172]}
+{"framework":"uhtml-v1.8.1-non-keyed","keyed":false,"benchmark":"22_run-memory","type":"memory","min":2.2823944091796875,"max":2.2823944091796875,"mean":2.2823944091796875,"median":2.2823944091796875,"geometricMean":2.2823944091796875,"standardDeviation":null,"values":[2.2823944091796875]}

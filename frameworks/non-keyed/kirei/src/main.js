@@ -1,11 +1,11 @@
-import { html, defineElement, ref, reactive } from '@kirei/element';
+import { html, defineComponent, ref, reactive } from '@kirei/element';
 window.html = html;
 
 function _random(max) {
     return Math.round(Math.random() * 1000) % max;
 }
 
-export default defineElement({
+export default defineComponent({
     name: 'MainElement',
     setup() {
         const rows = reactive([]);
@@ -76,7 +76,7 @@ export default defineElement({
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6">
-                <h1>@kirei/element</h1>
+                <h1>@kirei/element non-keyed</h1>
             </div>
             <div class="col-md-6">
                 <div class="row">

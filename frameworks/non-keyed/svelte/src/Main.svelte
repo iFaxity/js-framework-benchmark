@@ -1,9 +1,9 @@
 <div class="jumbotron">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>Svelte (non-keyed)</h1>
-    </div>
-    <div class="col-md-6">
+	<div class="row">
+		<div class="col-md-6">
+			<h1>Svelte (non-keyed)</h1>
+		</div>
+		<div class="col-md-6">
       <div class="row">
         <div class="col-sm-6 smallpad">
           <button type="button" class="btn btn-primary btn-block" id="run" on:click={run}>Create 1,000 rows</button>
@@ -27,11 +27,11 @@
         </div>
       </div>
     </div>
-  </div>
+	</div>
 </div>
 <table class="table table-hover table-striped test-data">
-  <tbody>
-    {#each data as row, num}
+	<tbody>
+		{#each data as row, num}
       <tr class={selected === row.id ? 'danger' : ''}>
         <td class="col-md-1">{row.id}</td>
         <td class="col-md-4">
@@ -40,8 +40,8 @@
         <td class="col-md-1"><a on:click={() => remove(row.id)}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
         <td class="col-md-6"></td>
       </tr>
-    {/each}
-  </tbody>
+		{/each}
+	</tbody>
 </table>
 <span class="preloadicon glyphicon glyphicon-remove" aria-hidden="true"></span>
 
@@ -85,9 +85,9 @@
     const adjectives = ["pretty", "large", "big", "small", "tall", "short", "long", "handsome", "plain", "quaint", "clean", "elegant", "easy", "angry", "crazy", "helpful", "mushy", "odd", "unsightly", "adorable", "important", "inexpensive", "cheap", "expensive", "fancy"],
       colours = ["red", "yellow", "blue", "green", "pink", "brown", "purple", "brown", "white", "black", "orange"],
       nouns = ["table", "chair", "house", "bbq", "desk", "car", "pony", "cookie", "sandwich", "burger", "pizza", "mouse", "keyboard"],
-      data = [];
+      data = new Array(count);
     for (var i = 0; i < count; i++)
-      data.push({ id: rowId++, label: adjectives[_random(adjectives.length)] + " " + colours[_random(colours.length)] + " " + nouns[_random(nouns.length)] });
+      data[i] = { id: rowId++, label: adjectives[_random(adjectives.length)] + " " + colours[_random(colours.length)] + " " + nouns[_random(nouns.length)] };
     return data;
   }
 </script>
